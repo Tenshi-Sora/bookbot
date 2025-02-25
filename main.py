@@ -1,4 +1,12 @@
-with open("books/frankenstein.txt") as f: # returns the frankenstein book as a string
+from stats import get_num_words
+import sys
+
+if len(sys.argv) != 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+
+path = sys.argv[1]
+with open(path) as f:
     file_contents = f.read()
 
 file_contents_word_count = len(file_contents.split()) # splits the singular string by word then gives the length/count of them
@@ -18,7 +26,7 @@ for x, y in file_contents_letter_count.items(): # returns only letters
         file_contents_just_letters[x] = y
 file_contents_just_letters = dict(sorted(file_contents_just_letters.items(), key=lambda item: item[0])) # re-organizes in alphabetical order by key
 def text_print_loop(x, y): # loop for bottom text to print properly
-    return f"The '{x}' character was found {y} times"  # Return a string instead of printing
+    return f"{x}: {y}"  # Return a string instead of printing
 print(f"""
 --- Begin report of books/frankenstein.txt ---
 {file_contents_word_count} words found in the document
